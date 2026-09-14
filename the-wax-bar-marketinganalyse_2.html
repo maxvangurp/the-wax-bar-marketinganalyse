@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketinganalyse The Wax Bar &middot; Aizy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #160D27;
+    --bg-deep: #0B0718;
+    --bg-soft: #250F4D;
+    --ink: #FFFFFF;
+    --ink-dim: rgba(255,255,255,0.72);
+    --ink-mute: rgba(255,255,255,0.45);
+    --purple: #6935CC;
+    --purple-2: #5623B3;
+    --violet: #9965F2;
+    --pink: #FF47D8;
+    --cyan: #5AF2FF;
+    --card: rgba(255,255,255,0.04);
+    --card-strong: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.12);
+    --grad: linear-gradient(90deg, #5623B3 0%, #FF47D8 51.7%, #5AF2FF 100%);
+    --grad-soft: linear-gradient(135deg, rgba(105,53,204,0.35), rgba(255,71,216,0.18) 60%, rgba(90,242,255,0.15));
+    --good: #5AF2FF;
+    --warn: #FFB547;
+    --red: #FF6B8A;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-deep);
+    color: var(--ink);
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  .display {
+    font-family: "Special Gothic Expanded One", "Plus Jakarta Sans", sans-serif;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+
+  /* Slide container */
+  .slide {
+    min-height: 100vh;
+    padding: 90px clamp(28px, 6vw, 120px) 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .slide.auto {
+    min-height: auto;
+    padding: 70px clamp(28px, 6vw, 120px);
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(800px 500px at 85% -10%, rgba(105,53,204,0.28), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(255,71,216,0.18), transparent 60%),
+      radial-gradient(600px 400px at 110% 110%, rgba(90,242,255,0.12), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .slide > * { position: relative; z-index: 1; }
+
+  /* Topbar */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px clamp(20px, 4vw, 40px);
+    background: rgba(11,7,24,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo-img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+
+  /* Typography helpers */
+  .eyebrow {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--grad);
+    margin-right: 10px;
+    vertical-align: 1px;
+  }
+
+  h1.title {
+    font-family: "Special Gothic Expanded One", "Plus Jakarta Sans", sans-serif;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    font-size: clamp(40px, 6.5vw, 92px);
+    margin: 0 0 24px;
+  }
+  h1.title .grad,
+  h2.heading .grad,
+  h3.sub .grad {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  h2.heading {
+    font-family: "Special Gothic Expanded One", "Plus Jakarta Sans", sans-serif;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    font-size: clamp(32px, 4.8vw, 60px);
+    margin: 0 0 20px;
+  }
+  h3.sub {
+    font-size: clamp(22px, 2.2vw, 30px);
+    margin: 40px 0 16px;
+    font-weight: 700;
+  }
+  p.lead {
+    font-size: clamp(16px, 1.25vw, 19px);
+    color: var(--ink-dim);
+    max-width: 880px;
+    margin: 0 0 24px;
+  }
+  p.body {
+    font-size: 16px;
+    color: var(--ink-dim);
+    max-width: 880px;
+    margin: 0 0 16px;
+  }
+  .meta {
+    color: var(--ink-mute);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .gradient-line {
+    height: 3px;
+    width: 120px;
+    background: var(--grad);
+    border-radius: 999px;
+    margin-bottom: 26px;
+  }
+
+  /* Cards grid */
+  .grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+    backdrop-filter: blur(6px);
+  }
+  .card.accent {
+    background:
+      linear-gradient(135deg, rgba(105,53,204,0.35), rgba(255,71,216,0.15)),
+      var(--card-strong);
+    border: 1px solid rgba(255,71,216,0.35);
+  }
+  .card .label {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 14px;
+  }
+  .card h4 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .card p { margin: 0; color: var(--ink-dim); font-size: 14.5px; }
+  .card .big {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: clamp(36px, 4vw, 60px);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .card .value {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: clamp(32px, 3.6vw, 52px);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+  .card .sub {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  .delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(90,242,255,0.12);
+    color: var(--cyan);
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+  }
+  .delta.down { background: rgba(255,180,71,0.12); color: var(--warn); }
+
+  /* Findings list */
+  .findings {
+    display: grid;
+    gap: 14px;
+    margin-top: 8px;
+    max-width: 960px;
+  }
+  .finding {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.025);
+    align-items: start;
+  }
+  .finding .ico {
+    width: 22px; height: 22px;
+    border-radius: 8px;
+    background: var(--grad);
+    display: inline-block;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .finding.warn .ico { background: linear-gradient(135deg, #FFB547, #FF6B8A); }
+  .finding.good .ico { background: linear-gradient(135deg, #5AF2FF, #9965F2); }
+  .finding h5 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .finding p { margin: 0; color: var(--ink-dim); font-size: 15px; }
+
+  /* Callout (subtle purple/cyan tint, use for Aanbeveling / Samengevat / Kernbevinding) */
+  .callout {
+    margin-top: 28px;
+    padding: 22px 24px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(105,53,204,0.18), rgba(90,242,255,0.05));
+    font-size: 15px;
+    color: var(--ink-dim);
+    max-width: 960px;
+  }
+  .callout strong { color: var(--ink); font-weight: 700; }
+
+  /* Chapter header with big gradient number */
+  .chapter-head {
+    display: flex;
+    align-items: baseline;
+    gap: 22px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .chapter-head .num {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: clamp(48px, 6vw, 90px);
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+
+  /* Device / two-stat feature */
+  .device-stat {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 16px 0 8px;
+    max-width: 960px;
+  }
+  .device-stat .stat {
+    padding: 26px 28px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .device-stat .stat.highlight {
+    background: linear-gradient(135deg, rgba(90,242,255,0.15), rgba(105,53,204,0.15));
+    border-color: rgba(90,242,255,0.35);
+  }
+  .device-stat .stat .small {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  .device-stat .stat .big {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: clamp(36px, 4.5vw, 58px);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .device-stat .stat .hint {
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+  @media (max-width: 720px) {
+    .device-stat { grid-template-columns: 1fr; }
+  }
+
+  /* Summary action rows */
+  .sum-row {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+  .sum-row:last-child { border-bottom: 1px solid var(--border); }
+  .sum-row .num {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: 22px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .sum-row h4 { margin: 0 0 6px; font-size: 20px; font-weight: 700; }
+  .sum-row p { margin: 0; color: var(--ink-dim); font-size: 15px; }
+
+  /* Platform header (Google / Meta / etc.) */
+  .platform {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 36px;
+  }
+  .platform-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    background: var(--grad-soft);
+    border: 1px solid var(--border);
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: 22px;
+  }
+  .platform h2 { margin: 0; }
+  .platform .sub { color: var(--ink-dim); font-size: 14px; margin-top: 4px; }
+
+  /* KPI table */
+  table.kpi {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    font-size: 14px;
+  }
+  table.kpi th, table.kpi td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  table.kpi th {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+  }
+  table.kpi td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.kpi td.pos { color: var(--cyan); font-weight: 700; }
+  table.kpi td.neg { color: var(--warn); font-weight: 700; }
+
+  /* Bar chart */
+  .bars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 90px;
+    gap: 14px;
+    align-items: center;
+    font-size: 13px;
+  }
+  .bar-row .lbl { color: var(--ink-dim); }
+  .bar-row .track {
+    height: 14px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar-row .fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--grad);
+  }
+  .bar-row .val {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Bullet list */
+  .bullets {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    gap: 12px;
+  }
+  .bullets li {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 14px;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .bullets li::before {
+    content: "";
+    display: block;
+    width: 10px; height: 10px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: var(--grad);
+  }
+  .bullets li span { color: var(--ink-dim); }
+
+  /* Split layout for tables + cards */
+  .split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 36px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .split { grid-template-columns: 1fr; }
+    .bar-row { grid-template-columns: 90px 1fr 70px; }
+  }
+
+  /* KPI pill list */
+  .kpi-row {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    margin: 10px 0 4px;
+  }
+  .kpi-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+  .kpi-pill strong { color: var(--ink); font-weight: 700; }
+
+  /* CTA buttons */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    background: var(--grad);
+    color: #0B0718;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .cta.ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--ink-mute);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .scroll-hint::after {
+    content: "";
+    width: 1px; height: 28px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  }
+
+  /* Footer */
+  footer {
+    padding: 44px clamp(20px, 4vw, 40px);
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="Aizy">
+    <svg class="logo-img" viewBox="270 440 530 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aizy">
+      <g fill="#FFFFFF">
+        <ellipse cx="318" cy="599.1" rx="40.8" ry="40.8" transform="translate(-283.2 913.1) rotate(-89.6)"/>
+        <path d="M447.5,513.4c-9.4-5.9-28.5-6.2-45.6-5.1-16.3,1.1-31.4-8.3-37.6-23.5-6.5-15.9-15.2-32.9-24.6-38.8-19.2-12-44.4-6.1-56.4,13.1-12,19.2-6.1,44.5,13.1,56.4,9.4,5.9,28.5,6.2,45.6,5.1,16.3-1.1,31.4,8.3,37.6,23.5,6.5,15.9,15.2,32.9,24.6,38.8,19.2,12,44.4,6.1,56.4-13.1,12-19.2,6.1-44.5-13.1-56.4Z"/>
+      </g>
+      <g fill="#F2F2F2">
+        <path d="M789.8,489c0-2-1.5-3.4-4.1-3.4h-4v9.7h2.1v-3h2.2l1.9,3h2.1l-2.2-3.3c1.3-.5,1.9-1.6,1.9-3ZM785.6,490.7h-1.8v-3.4h1.8c1.4,0,2.2.6,2.2,1.7s-.8,1.7-2.2,1.7Z"/>
+        <path d="M785.3,481.8c-4.9,0-8.7,3.8-8.7,8.7s3.8,8.7,8.7,8.7,8.7-3.8,8.7-8.7-3.7-8.6-8.7-8.6ZM785.3,497.8c-4.2,0-7.3-3.2-7.3-7.3s3.1-7.3,7.3-7.3,7.2,3.2,7.2,7.3-3.2,7.4-7.3,7.4Z"/>
+        <path d="M696.2,610.5l2.8-18c2.3.5,4.7.7,7.1.8,5.7,0,8-2.3,8-6.8s-.6-4.9-3.6-14.1l-21.8-66.7h20.4l16.7,53.8,17-53.8h20l-23.7,73.5c-8,24.9-14.1,33.5-28.6,33.5-4.9,0-9.7-.7-14.4-2.2ZM496,545.3c.1-22.5,18.5-40.6,41-40.5.2,0,.4,0,.5,0,8.2,0,16.2,2.4,22.9,7.1v-6.3h19.3v78.6h-19.3v-5.2c-6.8,4.4-14.8,6.9-22.9,6.9-22.7.3-41.2-17.9-41.5-40.6,0,0,0,0,0,0ZM514.6,545.3c.1,12.7,10.5,22.8,23.1,22.7,12.5-.1,22.5-10.2,22.7-22.7-.1-12.7-10.5-22.8-23.1-22.7-12.5.1-22.5,10.2-22.7,22.7ZM616.3,584.2v-17.1l41.6-44.3h-39.6v-17.2h65.5v17.2l-41.6,44.3h44.4v17.1h-70.3ZM589.7,584.2v-78.6h19.5v78.6h-19.5ZM588.1,488.2c0-6.2,4.9-11.2,11.1-11.2,6.2,0,11.2,4.9,11.2,11.1,0,6.2-4.9,11.2-11.1,11.2,0,0,0,0,0,0-6.1,0-11.1-4.9-11.1-11.1,0,0,0,0,0,0Z"/>
+      </g>
+    </svg>
+  </a>
+</header>
+
+<style>
+  /* Additieve laag: responsiviteit en structuurcomponenten. Kleuren en fonts ongewijzigd. */
+  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 18px; }
+  .tablewrap table.kpi { min-width: 560px; margin-top: 0; }
+  .grid { grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+  .slide > * { max-width: 100%; }
+  .slide { scroll-margin-top: 76px; }
+
+  /* Campagnestructuur */
+  .struct { display: grid; gap: 16px; margin-top: 20px; max-width: 1020px; }
+  .camp {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.025);
+    overflow: hidden;
+  }
+  .camp.later { border-style: dashed; opacity: 0.78; }
+  .camp-head {
+    display: flex; flex-wrap: wrap; gap: 10px 18px;
+    align-items: baseline; justify-content: space-between;
+    padding: 16px 22px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid var(--border);
+  }
+  .camp-head .nm { font-size: 16px; font-weight: 700; }
+  .camp-head .sub { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-top: 4px; }
+  .camp-budget { text-align: right; }
+  .camp-budget .bl {
+    display: block;
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 2px;
+  }
+  .camp-head .budget {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: 22px;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    white-space: nowrap;
+  }
+  .struct-total {
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    align-items: baseline; justify-content: space-between;
+    padding: 14px 22px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(105,53,204,0.18), rgba(90,242,255,0.05));
+  }
+  .struct-total .lab { font-size: 14px; color: var(--ink-dim); }
+  .struct-total .lab strong { color: var(--ink); }
+  .struct-total .amt {
+    font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: 20px;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    white-space: nowrap;
+  }
+  @media (max-width: 560px) {
+    .camp-budget { text-align: left; }
+    .struct-total { padding: 14px 16px; }
+  }
+  .ag {
+    display: grid; grid-template-columns: 210px minmax(0,1fr);
+    gap: 8px 18px;
+    padding: 14px 22px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .ag .ag-nm { font-size: 14.5px; font-weight: 600; }
+  .ag .kw { font-size: 13.5px; color: var(--ink-dim); word-break: break-word; }
+  .camp-foot {
+    padding: 12px 22px 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12.5px; color: var(--ink-mute);
+  }
+
+  /* Advertentievoorbeeld */
+  .adbox {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.04);
+    padding: 20px 22px;
+    max-width: 560px;
+  }
+  .adbox .url { font-size: 13px; color: var(--cyan); word-break: break-all; }
+  .adbox .ad-t { font-size: 18px; font-weight: 700; margin: 8px 0 6px; line-height: 1.3; }
+  .adbox .ad-d { font-size: 14px; color: var(--ink-dim); margin: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font-size: 12px; padding: 5px 11px; border-radius: 999px;
+    border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--ink-dim);
+  }
+  .kv { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 8px 18px; font-size: 14px; margin-top: 4px; }
+  .kv dt { color: var(--ink-mute); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding-top: 3px; }
+  .kv dd { margin: 0; color: var(--ink-dim); }
+  .kv dd strong { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .ag { grid-template-columns: 1fr; gap: 4px; }
+    .kv { grid-template-columns: 1fr; gap: 2px; }
+    .kv dd { margin-bottom: 12px; }
+  }
+  @media (max-width: 560px) {
+    .slide { padding: 88px 20px 64px; }
+    .slide.auto { padding: 56px 20px; }
+    h1.title { font-size: clamp(30px, 9vw, 44px); }
+    h2.heading { font-size: clamp(26px, 8vw, 40px); }
+    .card { padding: 20px; }
+    .findings .finding { grid-template-columns: 20px minmax(0,1fr); gap: 12px; padding: 16px; }
+    .bullets li { grid-template-columns: 18px minmax(0,1fr); gap: 12px; font-size: 15px; }
+    .sum-row { grid-template-columns: 34px minmax(0,1fr); gap: 12px; }
+    .camp-head, .ag, .camp-foot { padding-left: 16px; padding-right: 16px; }
+    .adbox { padding: 18px 16px; }
+  }
+</style>
+
+<section class="slide" id="top">
+  <h1 class="title">
+    <span class="grad">The Wax Bar</span><br>
+    Marketinganalyse.
+  </h1>
+  <p class="lead">
+    De markt, de zoekvraag, de concurrentie en de advertenties die nu draaien. Plus een concreet voorstel voor de verdeling van &euro;1.500 tot &euro;2.000 per maand over Meta en Google Ads, inclusief campagnestructuur.
+  </p>
+  <div class="meta">Opgesteld door Aizy &middot; september 2026</div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<section class="slide" id="inhoud">
+  <div class="gradient-line"></div>
+  <h2 class="heading">Vier <span class="grad">delen.</span></h2>
+  <p class="lead">
+    Opgebouwd van buitenaf, zonder toegang tot de advertentieaccounts. Alles komt uit publieke zoekdata, de live zoekresultaten, de advertentiehistorie van het domein en de website zelf.
+  </p>
+
+  <div class="grid" style="margin-top: 28px; max-width: 1000px;">
+    <div class="card">
+      <div class="label">Deel 1 &middot; Hoofdstuk 1 tot 4</div>
+      <h4>De markt</h4>
+      <p>Zoekvraag per stad, de trend in de categorie, het mannensegment en de concurrentie.</p>
+    </div>
+    <div class="card">
+      <div class="label">Deel 2 &middot; Hoofdstuk 5 tot 7</div>
+      <h4>Wat er nu gebeurt</h4>
+      <p>De huidige Google Ads, de landingspagina&rsquo;s en de meting rond de boeking.</p>
+    </div>
+    <div class="card accent">
+      <div class="label">Deel 3 &middot; Hoofdstuk 8 tot 11</div>
+      <h4>Het plan</h4>
+      <p>Budgetverdeling, campagnestructuur voor Google en Meta, en de prognose.</p>
+    </div>
+    <div class="card">
+      <div class="label">Deel 4</div>
+      <h4>Aan de slag</h4>
+      <p>De eerste 90 dagen en wat we van jullie nodig hebben.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="kern">
+  <div class="eyebrow"><span class="dot"></span>Kernbevinding</div>
+  <h2 class="heading">Search is het plafond.<br>Meta is de <span class="grad">groei.</span></h2>
+  <p class="lead">
+    De volledige biedbare zoekvraag rond de vijf vestigingen is ongeveer 4.500 tot 5.000 zoekopdrachten per maand. Daar past realistisch &euro;300 tot &euro;400 aan advertentiebudget in, en geen cent meer. Tegelijk staan jullie organisch al op positie 1 voor de grootste termen in de categorie.
+  </p>
+  <p class="lead">
+    Elke klant boven dat plafond komt dus uit iemand die vandaag niet zocht. Dat is precies wat Meta doet, en waxen leent zich ervoor: zichtbaar resultaat, duidelijke belofte, lage eerste stap.
+  </p>
+
+  <div class="kpi-row" style="margin-top: 26px;">
+    <div class="kpi-pill">Organisch verkeer: <strong>5.772 p/mnd</strong></div>
+    <div class="kpi-pill">Zoekwoorden in Google Ads nu: <strong>23</strong></div>
+    <div class="kpi-pill">Ingekocht verkeer nu: <strong>35 p/mnd</strong></div>
+    <div class="kpi-pill">Vestigingen: <strong>5</strong></div>
+  </div>
+</section>
+
+<section class="slide" id="h1">
+  <div class="eyebrow"><span class="dot"></span>Deel 1 &middot; De markt</div>
+  <div class="chapter-head">
+    <div class="num">01</div>
+    <div>
+      <h2 class="heading" style="margin:0;">De <span class="grad">zoekvraag.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Niet-merkgebonden zoekopdrachten per maand rond elke vestiging: &ldquo;brazilian wax + stad&rdquo;, &ldquo;waxen + stad&rdquo;, &ldquo;waxsalon + stad&rdquo; en &ldquo;harsen + stad&rdquo;.
+  </p>
+
+  <div class="card" style="max-width: 960px;">
+    <div class="label">Zoekopdrachten per maand &middot; SE Ranking, NL, september 2026</div>
+    <div class="bars">
+      <div class="bar-row"><div class="lbl">Rotterdam</div><div class="track"><div class="fill" style="width: 90%"></div></div><div class="val">1.110</div></div>
+      <div class="bar-row"><div class="lbl">Amsterdam</div><div class="track"><div class="fill" style="width: 58%"></div></div><div class="val">710</div></div>
+      <div class="bar-row"><div class="lbl">Den Haag</div><div class="track"><div class="fill" style="width: 44%"></div></div><div class="val">540</div></div>
+      <div class="bar-row"><div class="lbl">Breda</div><div class="track"><div class="fill" style="width: 19%"></div></div><div class="val">230</div></div>
+      <div class="bar-row"><div class="lbl">Amersfoort</div><div class="track"><div class="fill" style="width: 15%"></div></div><div class="val">190</div></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Opvallend:</strong> Rotterdam is als zoekmarkt groter dan Amsterdam, terwijl Amsterdam de grotere stad is. Daar hoort een andere budgetverdeling per vestiging bij dan &ldquo;iedereen evenveel&rdquo;.
+  </div>
+</section>
+
+<section class="slide auto">
+  <h3 class="sub" style="margin-top:0;">Het plafond, doorgerekend</h3>
+  <div class="device-stat">
+    <div class="stat">
+      <div class="small">Lokaal, niet-merk</div>
+      <div class="big">2.780</div>
+      <div class="hint">Zoekopdrachten per maand over vijf steden</div>
+    </div>
+    <div class="stat highlight">
+      <div class="small">Inclusief behandeltermen</div>
+      <div class="big">~4.750</div>
+      <div class="hint">Landelijke termen als brazilian wax (6.600) en waxen (1.600), begrensd op de verzorgingsgebieden</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Samengevat:</strong> bij 55 tot 70% impressieaandeel en 8 tot 12% doorklikratio zijn dat 200 tot 380 klikken per maand. De klikprijzen liggen tussen &euro;0,30 en &euro;1,10, gemiddeld rond &euro;0,60. Dat is &euro;150 tot &euro;350 per maand, en dan kopen we alles wat er te koop is.
+  </div>
+</section>
+
+<section class="slide" id="h2">
+  <div class="eyebrow"><span class="dot"></span>Deel 1 &middot; De markt</div>
+  <div class="chapter-head">
+    <div class="num">02</div>
+    <div>
+      <h2 class="heading" style="margin:0;">De categorie <span class="grad">krimpt.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Zoekvolume september 2025 tegenover september 2026. De laatste twee regels zijn controletermen buiten de wax-categorie, om te toetsen of dit aan de markt ligt of aan de meting.
+  </p>
+
+  <div class="tablewrap" style="max-width: 960px;">
+    <table class="kpi">
+      <thead>
+        <tr>
+          <th>Zoekwoord</th>
+          <th style="text-align:right;">Sep 2025</th>
+          <th style="text-align:right;">Sep 2026</th>
+          <th style="text-align:right;">Verschil</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>brazilian wax</td><td class="num">9.900</td><td class="num">6.600</td><td class="num neg">&minus;33%</td></tr>
+        <tr><td>waxen</td><td class="num">2.400</td><td class="num">1.600</td><td class="num neg">&minus;33%</td></tr>
+        <tr><td>harsen</td><td class="num">1.500</td><td class="num">1.100</td><td class="num neg">&minus;27%</td></tr>
+        <tr><td>laser ontharen</td><td class="num">5.400</td><td class="num">3.200</td><td class="num neg">&minus;41%</td></tr>
+        <tr><td>kapper amsterdam &middot; controle</td><td class="num">8.000</td><td class="num">6.600</td><td class="num neg">&minus;18%</td></tr>
+        <tr><td>schoonheidssalon den haag &middot; controle</td><td class="num">390</td><td class="num">260</td><td class="num neg">&minus;33%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Kernbevinding:</strong> de controletermen dalen mee, dus een deel zit in hoe zoekvolume tegenwoordig ontstaat: meer antwoorden direct in Google, minder klikken. Wax daalt niet harder dan de rest van de lokale beautymarkt. De conclusie blijft staan: het aantal mensen dat z&eacute;lf naar een waxsalon zoekt wordt niet groter.
+  </div>
+</section>
+
+<section class="slide" id="h3">
+  <div class="eyebrow"><span class="dot"></span>Deel 1 &middot; De markt</div>
+  <div class="chapter-head">
+    <div class="num">03</div>
+    <div>
+      <h2 class="heading" style="margin:0;">Mannen zijn <span class="grad">40% van je klanten.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Het staat op je eigen site. In de campagnes en in de beeldtaal van de hele categorie zie je het niet terug. De zoekvraag is er wel, en hij is goedkoop.
+  </p>
+
+  <div class="tablewrap" style="max-width: 820px;">
+    <table class="kpi">
+      <thead>
+        <tr>
+          <th>Zoekwoord</th>
+          <th style="text-align:right;">Volume p/mnd</th>
+          <th style="text-align:right;">Klikprijs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>rug ontharen mannen</td><td class="num">480</td><td class="num">&euro;0,55</td></tr>
+        <tr><td>haar waxen mannen</td><td class="num">480</td><td class="num">&euro;0,30</td></tr>
+        <tr><td>brazilian wax man</td><td class="num">480</td><td class="num">&euro;0,35</td></tr>
+        <tr><td>boyzilian</td><td class="num">260</td><td class="num">&euro;0,30</td></tr>
+        <tr><td>mannen waxen</td><td class="num">260</td><td class="num">&euro;0,30</td></tr>
+        <tr><td>harsen voor mannen</td><td class="num">140</td><td class="num">&euro;0,30</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Aanbeveling:</strong> geef mannen een eigen campagne op Google &eacute;n op Meta, met eigen beeld. Een klik kost hier ongeveer de helft van een klik op &ldquo;brazilian wax amsterdam&rdquo;, terwijl een Male Brazilian &euro;75 opbrengt tegen &euro;60.
+  </div>
+</section>
+
+<section class="slide" id="h4">
+  <div class="eyebrow"><span class="dot"></span>Deel 1 &middot; De markt</div>
+  <div class="chapter-head">
+    <div class="num">04</div>
+    <div>
+      <h2 class="heading" style="margin:0;">Wie er <span class="grad">naast je staat.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Twee soorten concurrentie: de waxketen die vier keer zoveel vestigingen heeft, en de laserklinieken die dezelfde klant op een andere manier bedienen.
+  </p>
+
+  <div class="grid" style="margin-top: 8px; max-width: 1000px;">
+    <div class="card">
+      <div class="label">Delete Waxing &middot; vestigingen</div>
+      <div class="value">20+</div>
+      <div class="sub">Waarvan zes tot acht in Amsterdam. Ook Rotterdam, Den Haag, Utrecht, Eindhoven, Zwolle, Almere.</div>
+    </div>
+    <div class="card accent">
+      <div class="label">Organisch verkeer p/mnd</div>
+      <div class="value">6.307</div>
+      <div class="sub">Tegen 5.772 bij jullie, met vier keer zo weinig vestigingen. Jullie vindbaarheid is relatief sterker.</div>
+    </div>
+    <div class="card">
+      <div class="label">Zoekwoorden in Google Ads</div>
+      <div class="value">123</div>
+      <div class="sub">Tegen 23 bij jullie. Zij kopen circa 445 bezoekers per maand in, jullie 35.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Het verschil zit niet in de prijs:</strong> een Brazilian kost bij Delete &euro;59,98, bij jullie &euro;60. Het verschil zit in het model. Delete verkoopt hem als abonnement van &euro;41,95 per maand, met een actie &ldquo;12 maanden + 1 maand gratis&rdquo;. Dat bindt een klant een jaar. De Wax Deal is prepaid tegoed: een korting, geen binding. Wie een abonnement verkoopt, mag meer betalen voor een nieuwe klant.
+  </div>
+</section>
+
+<section class="slide auto">
+  <h3 class="sub" style="margin-top:0;">Laser is de echte categorieconcurrent</h3>
+  <div class="findings">
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>De enige adverteerder op &ldquo;brazilian wax amsterdam&rdquo; is een laserkliniek</h5>
+        <p>Undo.nl biedt op waxtermen en stuurt naar een laserpagina. Op de brede term &ldquo;brazilian wax&rdquo; staan verder alleen twee kleine salons.</p>
+      </div>
+    </div>
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>Laser koopt duurder verkeer in</h5>
+        <p>&ldquo;Laser ontharen&rdquo; kost &euro;1,28 per klik bij maximale concurrentie, waxtermen rond &euro;0,50. Laser kan dat betalen omdat een traject honderden euro&rsquo;s kost.</p>
+      </div>
+    </div>
+    <div class="finding good">
+      <div class="ico"></div>
+      <div>
+        <h5>Het zoekveld rond wax is juist leeg</h5>
+        <p>Er biedt bijna niemand serieus mee. Dat maakt Google Search voor jullie goedkoop, en het maakt het extra zonde dat het budget nu deels naar de eigen merknaam gaat.</p>
+      </div>
+    </div>
+    <div class="finding good">
+      <div class="ico"></div>
+      <div>
+        <h5>Het tegenargument ligt onbenut</h5>
+        <p>Direct resultaat, geen traject van maanden, werkt op elke haarkleur, &eacute;&eacute;n afspraak van twintig minuten. Niemand claimt dit nu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="h5">
+  <div class="eyebrow"><span class="dot"></span>Deel 2 &middot; Wat er nu gebeurt</div>
+  <div class="chapter-head">
+    <div class="num">05</div>
+    <div>
+      <h2 class="heading" style="margin:0;">De huidige <span class="grad">campagnes.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Advertenties die we de afgelopen twaalf maanden in de zoekresultaten hebben zien staan, zonder accounttoegang.
+  </p>
+
+  <div class="findings">
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>Advertenties in steden zonder salon</h5>
+        <p>Eindhoven, Arnhem, Apeldoorn, Hilversum, Veenendaal en Tilburg. Wie daar klikt, kan nergens terecht.</p>
+      </div>
+    </div>
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>De verkeerde stad in de advertentietekst</h5>
+        <p>Teksten als &ldquo;Amsterdam wax salon&rdquo; en &ldquo;Amsterdamse waxspecialist&rdquo; verschijnen bij zoekopdrachten in Rotterdam en Breda.</p>
+      </div>
+    </div>
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>Beloftes die niet kloppen met de site</h5>
+        <p>&ldquo;In het weekend geopend&rdquo;, terwijl alle vestigingen op zondag dicht zijn. En &ldquo;Pijnloze Brazilian&rdquo;, terwijl de site zelf terecht &ldquo;minder pijnlijk&rdquo; zegt.</p>
+      </div>
+    </div>
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>Betaald verkeer naar een blogartikel</h5>
+        <p>Advertenties op &ldquo;ballen harsen&rdquo; landen op een blog over de boyzilian wax. Geen prijs, geen boekknop.</p>
+      </div>
+    </div>
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>Betalen voor de eigen merknaam</h5>
+        <p>Het grootste deel van de 23 actieve zoekwoorden gaat over &ldquo;the wax bar&rdquo; en varianten, waar jullie organisch al op positie 1 staan.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Aanbeveling:</strong> steden zonder salon direct uit, merk en niet-merk uit elkaar, advertentieteksten per stad. Dit kost niets en stopt de verspilling in week 1.
+  </div>
+</section>
+
+<section class="slide" id="h6">
+  <div class="eyebrow"><span class="dot"></span>Deel 2 &middot; Wat er nu gebeurt</div>
+  <div class="chapter-head">
+    <div class="num">06</div>
+    <div>
+      <h2 class="heading" style="margin:0;">De <span class="grad">landingspagina&rsquo;s.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    De advertentie doet het werk tot de klik. Daarna moet de pagina het overnemen, en daar gaat nu rendement verloren.
+  </p>
+
+  <ul class="bullets" style="max-width: 900px;">
+    <li><div>Op de behandelpagina&rsquo;s staat <span>geen prijs en geen directe boekknop</span>. Wie wil boeken gaat eerst terug naar de locatiepagina, kiest daar een vestiging, en komt dan pas in de boekingswidget.</div></li>
+    <li><div>De H1 van de homepage is <span>letterlijk &ldquo;Homepage&rdquo;</span>.</div></li>
+    <li><div>De Engelse prijslijst wijkt af van de Nederlandse: <span>Brazilian &euro;58 tegenover &euro;60</span>.</div></li>
+    <li><div>Amersfoort staat met <span>twee verschillende huisnummers</span> op de site. Noordwijk staat nog in de meta-omschrijving terwijl de pagina een 404 geeft.</div></li>
+    <li><div>De claim &ldquo;4,7 uit 100.000+ klanten&rdquo; is <span>nergens onderbouwd</span>, de recensiepagina is leeg en Trustpilot staat op 3,4 met elf beoordelingen.</div></li>
+  </ul>
+
+  <div class="callout">
+    <strong>Aanbeveling:</strong> zet op elke locatie- en behandelpagina een boekknop die rechtstreeks naar de widget van de juiste vestiging gaat, met de prijs erbij. Dit is de goedkoopste rendementsverbetering in het hele plan: dezelfde klikken, meer boekingen.
+  </div>
+</section>
+
+<section class="slide" id="h7">
+  <div class="eyebrow"><span class="dot"></span>Deel 2 &middot; Wat er nu gebeurt</div>
+  <div class="chapter-head">
+    <div class="num">07</div>
+    <div>
+      <h2 class="heading" style="margin:0;">De boeking wordt <span class="grad">niet gemeten.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Dit is het enige punt in deze analyse dat blokkerend is. Meta en Google kunnen zonder dit signaal niet leren wie er boekt.
+  </p>
+
+  <div class="findings">
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>Boeken gebeurt op een extern domein</h5>
+        <p>De Aimy-widget draait buiten de site. Meetbaar is alleen de kl&iacute;k ernaartoe, niet de afspraak die eruit komt.</p>
+      </div>
+    </div>
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>Geen aantoonbare Meta Pixel</h5>
+        <p>Zonder pixel en Conversions API geen retargeting en geen optimalisatie op boekingen.</p>
+      </div>
+    </div>
+    <div class="finding warn">
+      <div class="ico"></div>
+      <div>
+        <h5>De Engelse site meet met parameters uit 2021</h5>
+        <p>De boeklinks daar wijzen naar een oud boekingsdomein, met meetparameters uit juni 2021 vast in de URL. Dat vervuilt elke meting van Engelstalige bezoekers.</p>
+      </div>
+    </div>
+    <div class="finding good">
+      <div class="ico"></div>
+      <div>
+        <h5>Google Tag Manager staat er al</h5>
+        <p>De container is actief op de site. De basis ligt er, we hebben alleen toegang nodig om te zien wat erin zit.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Aanbeveling:</strong> vraag Aimy of de widget een bevestiging kan doorgeven bij een afgeronde boeking. Kan dat niet, dan meten we de klik naar de widget als tussenstap en tellen we boekingen de eerste maanden handmatig bij. Een waxklant komt elke vier tot zes weken terug: weten welke advertentie een n&iacute;euwe klant opleverde is op termijn de grootste winst in het account.
+  </div>
+</section>
+
+<section class="slide" id="h8">
+  <div class="eyebrow"><span class="dot"></span>Deel 3 &middot; Het plan</div>
+  <div class="chapter-head">
+    <div class="num">08</div>
+    <div>
+      <h2 class="heading" style="margin:0;">Waar het budget <span class="grad">heen gaat.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Uitgewerkt op &euro;1.750 per maand, het midden van de bandbreedte. Bij &euro;1.500 gaat de verlaging volledig van Meta prospecting af, bij &euro;2.000 gaat de verhoging daar ook volledig heen.
+  </p>
+
+  <div class="tablewrap" style="max-width: 980px;">
+    <table class="kpi">
+      <thead>
+        <tr>
+          <th>Kanaal</th>
+          <th style="text-align:right;">Budget p/mnd</th>
+          <th>Opdracht</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Meta &middot; nieuwe klanten</td><td class="num">&euro;850</td><td>Vraag maken bij mensen die nu niet zoeken. Vijf straalgebieden, breed.</td></tr>
+        <tr><td>Meta &middot; mannen</td><td class="num">&euro;200</td><td>Eigen campagne, eigen beeld: rug, borst, boyzilian, full body.</td></tr>
+        <tr><td>Meta &middot; retargeting</td><td class="num">&euro;150</td><td>Sitebezoekers, videokijkers, klantenlijst. Laagste kost per boeking.</td></tr>
+        <tr><td>Google &middot; lokaal, niet-merk</td><td class="num">&euro;300</td><td>Vijf advertentiegroepen, &eacute;&eacute;n per stad, straal 8 tot 12 km.</td></tr>
+        <tr><td>Google &middot; behandelingen</td><td class="num">&euro;120</td><td>Brazilian, bikini, benen, oksels, full body, gezicht.</td></tr>
+        <tr><td>Google &middot; mannen</td><td class="num">&euro;80</td><td>Boyzilian, rug, borst, full body voor mannen.</td></tr>
+        <tr><td>Google &middot; merk, defensief</td><td class="num">&euro;50</td><td>Alleen exact. Zodra blijkt dat niemand op jullie naam biedt: uit.</td></tr>
+        <tr><td><strong>Totaal</strong></td><td class="num"><strong>&euro;1.750</strong></td><td>Meta 69% &middot; Google 31%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Hoe deze bedragen landen in campagnes:</strong> Google (&euro;550) staat uitgewerkt in hoofdstuk 9, Meta (&euro;1.200) in hoofdstuk 10.<br><br><strong>Waarom Meta het grootste deel krijgt:</strong> Search kan alleen oogsten wat er al is, en dat is ongeveer &euro;350 per maand aan klikken. Die kopen we allemaal, want het is het goedkoopste en best converterende verkeer dat er is. De groei moet daarboven vandaan komen.
+  </div>
+</section>
+
+<section class="slide" id="h9">
+  <div class="eyebrow"><span class="dot"></span>Deel 3 &middot; Het plan</div>
+  <div class="chapter-head">
+    <div class="num">09</div>
+    <div>
+      <h2 class="heading" style="margin:0;">Google Ads <span class="grad">campagnestructuur.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Vier campagnes in fase 1, strikt gescheiden op zoekintentie. Geen losse campagne per vestiging: bij dit budget leert &eacute;&eacute;n lokale campagne met vijf advertentiegroepen sneller dan vijf campagnes die elk te weinig data krijgen.
+  </p>
+
+  <div class="struct">
+
+    <div class="struct-total">
+      <div class="lab"><strong>Google Ads samen: &euro;550 per maand</strong> van de &euro;1.750 uit hoofdstuk 8. De bedragen hieronder zijn dagbudgetten omgerekend naar maandbudget per campagne.</div>
+      <div class="amt">&euro;550</div>
+    </div>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Search &middot; Merk</div>
+          <div class="sub">Exact &middot; Klikken maximaliseren, bodlimiet &euro;0,40</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">&euro;50</span></div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Merk algemeen</div>
+        <div class="kw">[the wax bar], [thewaxbar], [wax bar] &rarr; homepage</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Merk + vestiging</div>
+        <div class="kw">[wax bar amsterdam], [wax bar rotterdam], [wax bar den haag], [wax bar breda], [wax bar amersfoort] &rarr; locatiepagina</div>
+      </div>
+      <div class="camp-foot">Doel: voorkomen dat een concurrent boven jullie staat. Beoordelen op het aandeel vertoningen bij merkzoekopdrachten, niet op CPA, want deze klanten komen sowieso.</div>
+    </div>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Search &middot; Lokaal</div>
+          <div class="sub">Woordgroep en exact &middot; Conversies maximaliseren &middot; straal 8 tot 12 km per salon</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">&euro;300</span></div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Rotterdam</div>
+        <div class="kw">&ldquo;brazilian wax rotterdam&rdquo;, &ldquo;waxen rotterdam&rdquo;, &ldquo;waxsalon rotterdam&rdquo;, &ldquo;harsen rotterdam&rdquo;, &ldquo;waxing rotterdam&rdquo; &rarr; /locatie/rotterdam</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Amsterdam</div>
+        <div class="kw">&ldquo;brazilian wax amsterdam&rdquo;, &ldquo;waxen amsterdam&rdquo;, &ldquo;waxsalon amsterdam&rdquo;, &ldquo;harsen amsterdam&rdquo; &rarr; /locatie/amsterdam</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Den Haag</div>
+        <div class="kw">&ldquo;waxen den haag&rdquo;, &ldquo;brazilian wax den haag&rdquo;, &ldquo;waxsalon den haag&rdquo; &rarr; /locatie/denhaag</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Breda</div>
+        <div class="kw">&ldquo;waxen breda&rdquo;, &ldquo;brazilian wax breda&rdquo;, &ldquo;waxsalon breda&rdquo; &rarr; /locatie/breda</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Amersfoort</div>
+        <div class="kw">&ldquo;waxen amersfoort&rdquo;, &ldquo;brazilian wax amersfoort&rdquo;, &ldquo;harsen amersfoort&rdquo; &rarr; /locatie/amersfoort</div>
+      </div>
+      <div class="camp-foot">Locatie-instelling op &ldquo;aanwezigheid&rdquo;, niet op &ldquo;interesse&rdquo;. Zoekpartners uit. Advertentietekst noemt altijd de stad en het adres. Zodra een vestiging genoeg volume heeft, tillen we die naar een eigen campagne voor eigen budgetsturing.</div>
+    </div>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Search &middot; Behandelingen</div>
+          <div class="sub">Woordgroep &middot; Conversies maximaliseren &middot; alleen binnen de vijf verzorgingsgebieden</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">&euro;120</span></div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Brazilian &amp; bikini</div>
+        <div class="kw">&ldquo;brazilian wax&rdquo;, &ldquo;hollywood wax&rdquo;, &ldquo;bikinilijn harsen&rdquo;, &ldquo;bikini waxen&rdquo; &rarr; /menu/brazilian-wax</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Benen &amp; oksels</div>
+        <div class="kw">&ldquo;benen waxen&rdquo;, &ldquo;benen harsen&rdquo;, &ldquo;oksels waxen&rdquo; &rarr; behandelpagina benen</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Full body</div>
+        <div class="kw">&ldquo;full body wax&rdquo;, &ldquo;full body harsen&rdquo; &rarr; /menu/full-body-wax</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Gezicht</div>
+        <div class="kw">&ldquo;bovenlip harsen&rdquo;, &ldquo;gezicht harsen&rdquo;, &ldquo;wenkbrauwen harsen&rdquo; &rarr; gezichtspagina</div>
+      </div>
+      <div class="camp-foot">Deze termen zijn landelijk, dus de geografische begrenzing doet hier het werk. Prijs in de advertentietekst zetten filtert de shoppers eruit en verhoogt de conversieratio.</div>
+    </div>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Search &middot; Mannen</div>
+          <div class="sub">Woordgroep en breed &middot; Conversies maximaliseren</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">&euro;80</span></div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Boyzilian &amp; intiem</div>
+        <div class="kw">&ldquo;brazilian wax man&rdquo;, &ldquo;boyzilian&rdquo;, &ldquo;male brazilian&rdquo; &rarr; /en/menu/male-brazilian-wax</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Rug &amp; borst</div>
+        <div class="kw">&ldquo;rug ontharen mannen&rdquo;, &ldquo;rug harsen&rdquo;, &ldquo;borst waxen&rdquo; &rarr; /menu/rug-waxen</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Algemeen mannen</div>
+        <div class="kw">&ldquo;mannen waxen&rdquo;, &ldquo;harsen voor mannen&rdquo;, &ldquo;haar waxen mannen&rdquo; &rarr; mannenpagina, nieuw te maken</div>
+      </div>
+      <div class="camp-foot">Er is nu geen landingspagina voor mannen. Die komt er: &eacute;&eacute;n pagina met alle mannenbehandelingen, prijzen en een directe boekknop.</div>
+    </div>
+
+    <div class="camp later">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Fase 2 &middot; Performance Max Lokaal en Demand Gen</div>
+          <div class="sub">Pas aanzetten zodra de boeking meetbaar is</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">n.t.b.</span></div>
+      </div>
+      <div class="camp-foot">Beide kanalen sturen op een conversiesignaal. Zolang dat signaal &ldquo;klik naar de boekingswidget&rdquo; is in plaats van &ldquo;afspraak gemaakt&rdquo;, optimaliseren ze naar het verkeerde doel. Niet eerder starten.</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="slide auto">
+  <h3 class="sub" style="margin-top:0;">Uitsluitingen die accountbreed gelden</h3>
+  <ul class="bullets" style="max-width: 940px;">
+    <li><div>Steden zonder vestiging worden <span>uitgesloten op locatieniveau</span>: Eindhoven, Arnhem, Apeldoorn, Hilversum, Veenendaal, Tilburg en alles buiten de vijf stralen.</div></li>
+    <li><div>Gedeelde negatieve zoekwoordenlijst: <span>opleiding, cursus, training, zelf, thuis, kit, vacature, gratis, ervaringen, salaris, laser, ipl, definitief.</span></div></li>
+    <li><div>Concurrentnamen worden <span>niet</span> ingekocht. Dat levert dure klikken op van mensen die een ander merk zoeken.</div></li>
+    <li><div>Advertentie-extensies: <span>sitelinks per vestiging, prijsextensies per behandeling, locatie-extensies via Google Business Profile, en belextensie binnen openingstijden.</span></div></li>
+  </ul>
+</section>
+
+<section class="slide" id="h9b">
+  <div class="eyebrow"><span class="dot"></span>Deel 3 &middot; Het plan</div>
+  <h2 class="heading">E&eacute;n advertentiegroep <span class="grad">uitgewerkt.</span></h2>
+  <p class="lead">
+    Zo ziet advertentiegroep &ldquo;Rotterdam&rdquo; er in de praktijk uit. De andere vier volgen hetzelfde stramien, met de eigen stad en het eigen adres.
+  </p>
+
+  <div class="split" style="margin-top: 26px;">
+    <div>
+      <dl class="kv">
+        <dt>Zoekwoorden</dt>
+        <dd>&ldquo;brazilian wax rotterdam&rdquo; &middot; &ldquo;waxen rotterdam&rdquo; &middot; &ldquo;waxsalon rotterdam&rdquo; &middot; &ldquo;harsen rotterdam&rdquo; &middot; &ldquo;waxing rotterdam&rdquo;</dd>
+        <dt>Volume</dt>
+        <dd><strong>1.110 zoekopdrachten per maand</strong>, klikprijs &euro;0,39 tot &euro;0,67</dd>
+        <dt>Targeting</dt>
+        <dd>Straal 10 km rond William Boothlaan 17A, aanwezigheid, Nederlands en Engels</dd>
+        <dt>Landingspagina</dt>
+        <dd>/locatie/rotterdam, met prijs en directe boekknop naar de widget van Rotterdam</dd>
+        <dt>Negatief</dt>
+        <dd>opleiding, cursus, zelf, kit, vacature, laser</dd>
+      </dl>
+
+      <div class="chips">
+        <div class="chip">Sitelink: Prijzen</div>
+        <div class="chip">Sitelink: Voor mannen</div>
+        <div class="chip">Sitelink: Eerste keer waxen</div>
+        <div class="chip">Callout: Open tot 21:00</div>
+        <div class="chip">Callout: Sinds 2011</div>
+        <div class="chip">Locatie-extensie</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="adbox">
+        <div class="label" style="margin-bottom: 10px;">Voorbeeldadvertentie</div>
+        <div class="url">Ad &middot; www.thewaxbar.nl/locatie/rotterdam</div>
+        <div class="ad-t">Waxen in Rotterdam &middot; Klaar in circa 20 minuten</div>
+        <p class="ad-d">Waxbehandeling aan de William Boothlaan, doordeweeks open tot 21:00. Direct online boeken. Eerste keer? We nemen extra tijd voor je, met onze eigen Supreme Wax.</p>
+      </div>
+
+      <ul class="bullets" style="margin-top: 22px;">
+        <li><div>Kop 1 vastgezet op <span>&ldquo;Waxen in Rotterdam&rdquo;</span>, zodat de stad altijd vooraan staat.</div></li>
+        <li><div>Minimaal <span>tien koppen en vier beschrijvingen</span> per advertentiegroep, gevarieerd op tijd, drempel, prijs en bewijs.</div></li>
+        <li><div>Geen claim &ldquo;pijnloos&rdquo; of &ldquo;in het weekend geopend&rdquo;: <span>wat in de advertentie staat moet op de pagina kloppen.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="h10">
+  <div class="eyebrow"><span class="dot"></span>Deel 3 &middot; Het plan</div>
+  <div class="chapter-head">
+    <div class="num">10</div>
+    <div>
+      <h2 class="heading" style="margin:0;">De <span class="grad">Meta-opzet.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Drie campagnes, elk met een eigen opdracht. Breed targeten, het creatief doet het segmenteren.
+  </p>
+
+  <div class="struct">
+    <div class="struct-total">
+      <div class="lab"><strong>Meta samen: &euro;1.200 per maand</strong> van de &euro;1.750 uit hoofdstuk 8. Verdeeld over drie campagnes met elk een eigen opdracht.</div>
+      <div class="amt">&euro;1.200</div>
+    </div>
+    <div class="camp">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Nieuwe klanten</div>
+          <div class="sub">Vijf advertentiesets, &eacute;&eacute;n per vestiging &middot; straal 10 tot 15 km &middot; breed, geen interesses</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">&euro;850</span></div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Invalshoek 1</div>
+        <div class="kw">Eerste keer? Dan doen we het rustig aan. Video met een technician die uitlegt wat er gebeurt.</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Invalshoek 2</div>
+        <div class="kw">Twintig minuten, in je lunchpauze. Tijd als drempel, open tot 21:00 als antwoord.</div>
+      </div>
+      <div class="ag">
+        <div class="ag-nm">Invalshoek 3</div>
+        <div class="kw">Wax versus laser. Direct resultaat, geen traject, werkt op elke haarkleur.</div>
+      </div>
+      <div class="camp-foot">Achter de hand: Supreme Wax als productverhaal, en het aanbod voor terugkerende klanten. Alles in staand 9:16 en vierkant 1:1.</div>
+    </div>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Mannen</div>
+          <div class="sub">Eigen beeld, eigen toon &middot; zelfde vijf straalgebieden</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">&euro;200</span></div>
+      </div>
+      <div class="camp-foot">Rug, borst, boyzilian en full body. 40% van de klanten is man, terwijl de beeldtaal in deze categorie vrijwel volledig op vrouwen is gericht. Dat is de opening.</div>
+    </div>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div>
+          <div class="nm">Retargeting</div>
+          <div class="sub">Sitebezoekers 30 dagen &middot; videokijkers &middot; profielinteracties &middot; klantenlijst</div>
+        </div>
+        <div class="camp-budget"><span class="bl">Budget p/mnd</span><span class="budget">&euro;150</span></div>
+      </div>
+      <div class="camp-foot">Hier zit de laagste kost per boeking. Boodschap verschilt per publiek: wie de prijzenpagina zag krijgt het aanbod, wie een video keek krijgt de uitleg.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Let op de advertentieregels:</strong> een zin als &ldquo;heb j&iacute;j last van ingegroeide haartjes?&rdquo; wijst de kijker een lichaamskenmerk toe en wordt door Meta afgekeurd. &ldquo;Bij ons zien we vaak&hellip;&rdquo; mag wel. Dit bepaalt mede hoe we de shoot briefen.
+  </div>
+</section>
+
+<section class="slide" id="h11">
+  <div class="eyebrow"><span class="dot"></span>Deel 3 &middot; Het plan</div>
+  <div class="chapter-head">
+    <div class="num">11</div>
+    <div>
+      <h2 class="heading" style="margin:0;">Wat het <span class="grad">oplevert.</span></h2>
+    </div>
+  </div>
+  <p class="lead">
+    Doorgerekend op de zoekvolumes en klikprijzen uit deel 1, met marktgemiddelde conversiepercentages. Een prognose, geen belofte: we ijken hem zodra we veertien dagen eigen cijfers hebben.
+  </p>
+
+  <div class="tablewrap" style="max-width: 980px;">
+    <table class="kpi">
+      <thead>
+        <tr>
+          <th>Kanaal</th>
+          <th style="text-align:right;">Klikken p/mnd</th>
+          <th style="text-align:right;">Kost per klik</th>
+          <th style="text-align:right;">Naar boeking</th>
+          <th style="text-align:right;">Boekingen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Google Search</td><td class="num">200&ndash;380</td><td class="num">&euro;0,50&ndash;0,90</td><td class="num">8&ndash;12%</td><td class="num pos">20&ndash;42</td></tr>
+        <tr><td>Meta prospecting</td><td class="num">1.100&ndash;1.900</td><td class="num">&euro;0,45&ndash;0,80</td><td class="num">2&ndash;4%</td><td class="num pos">25&ndash;70</td></tr>
+        <tr><td>Meta retargeting</td><td class="num">200&ndash;350</td><td class="num">&euro;0,40&ndash;0,70</td><td class="num">5&ndash;9%</td><td class="num pos">10&ndash;30</td></tr>
+        <tr><td><strong>Samen</strong></td><td class="num"><strong>1.500&ndash;2.600</strong></td><td class="num">&middot;</td><td class="num">&middot;</td><td class="num pos"><strong>55&ndash;140</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="body" style="margin-top: 14px;">Verdeeld over vijf vestigingen: ongeveer 11 tot 28 extra boekingen per salon per maand. In maand 1 zit je aan de onderkant, dan leren de algoritmes nog.</p>
+
+  <div class="device-stat" style="margin-top: 26px;">
+    <div class="stat">
+      <div class="small">Directe omzet p/mnd</div>
+      <div class="big">&euro;3.000&ndash;7.700</div>
+      <div class="hint">Bij een gemiddelde besteding van &euro;55 per bezoek, op &euro;1.750 mediabudget</div>
+    </div>
+    <div class="stat highlight">
+      <div class="small">Waarde in twaalf maanden</div>
+      <div class="big">&euro;220&ndash;440</div>
+      <div class="hint">Per nieuwe klant, bij vier tot acht bezoeken per jaar. Kost per nieuwe klant: &euro;15 tot &euro;35</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>De twee cijfers die we missen:</strong> hoe vaak komt een klant terug, en hoeveel besteedt die gemiddeld. Jullie boekingssysteem weet dat. Het zijn de belangrijkste getallen van deze hele analyse, want ze bepalen hoeveel een nieuwe klant mag kosten.
+  </div>
+</section>
+
+<section class="slide" id="planning">
+  <div class="eyebrow"><span class="dot"></span>Deel 4 &middot; Aan de slag</div>
+  <h2 class="heading">De eerste <span class="grad">90 dagen.</span></h2>
+
+  <div style="max-width: 960px;">
+    <div class="sum-row">
+      <div class="num">01</div>
+      <div>
+        <h4>Week 1 &middot; Verspilling stoppen</h4>
+        <p>Toegang tot alle accounts. Steden zonder salon uit, merk en niet-merk uit elkaar. Kost niets, werkt meteen.</p>
+      </div>
+    </div>
+    <div class="sum-row">
+      <div class="num">02</div>
+      <div>
+        <h4>Week 2 &middot; Meting op orde</h4>
+        <p>Pixel, Conversions API, boekingsgebeurtenis en telefoonklik. Boekknop rechtstreeks vanaf locatie- en behandelpagina&rsquo;s.</p>
+      </div>
+    </div>
+    <div class="sum-row">
+      <div class="num">03</div>
+      <div>
+        <h4>Week 3 &middot; Google opnieuw opgebouwd</h4>
+        <p>De vier campagnes uit hoofdstuk 9, met advertentieteksten per stad en de mannenpagina live.</p>
+      </div>
+    </div>
+    <div class="sum-row">
+      <div class="num">04</div>
+      <div>
+        <h4>Week 4 &middot; Meta live</h4>
+        <p>Drie invalshoeken, breed, vijf straalgebieden rond de vestigingen.</p>
+      </div>
+    </div>
+    <div class="sum-row">
+      <div class="num">05</div>
+      <div>
+        <h4>Maand 2 &middot; Uitbreiden</h4>
+        <p>Retargeting en mannencampagne aan, eerste creatives vervangen, prognose voor het eerst geijkt.</p>
+      </div>
+    </div>
+    <div class="sum-row">
+      <div class="num">06</div>
+      <div>
+        <h4>Maand 3 &middot; Schalen</h4>
+        <p>Budget naar wat werkt, sturen per vestiging, Performance Max erbij zodra de meting staat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="nodig">
+  <div class="eyebrow"><span class="dot"></span>Deel 4 &middot; Aan de slag</div>
+  <h2 class="heading">Wat we van jullie <span class="grad">nodig hebben.</span></h2>
+
+  <ul class="bullets" style="max-width: 940px; margin-top: 26px;">
+    <li><div>Toegang tot Google Ads, Meta Business Manager, Tag Manager, GA4 en Google Business Profile van alle vijf vestigingen. <span>Plus een contactpersoon bij Aimy.</span></div></li>
+    <li><div>Twee cijfers uit het boekingssysteem: <span>gemiddelde besteding per bezoek en bezoekfrequentie per jaar.</span></div></li>
+    <li><div>Beeldmateriaal in staand en vierkant, per vestiging, met mannen &eacute;n vrouwen in beeld. <span>Dit bepaalt of Meta werkt, en het is het enige waar wij niet omheen kunnen werken.</span></div></li>
+    <li><div>Een besluit over het aanbod: <span>komt er iets voor nieuwe klanten, of houden we vast aan de volle prijs?</span></div></li>
+    <li><div>Akkoord op de nieuwe mannenpagina en op de boekknoppen per vestiging. <span>Wie voert dat uit, en wanneer?</span></div></li>
+    <li><div>Duidelijkheid over Noordwijk en over de groeiplannen. <span>Komen er vestigingen bij, dan bouwen we de campagnes daar nu al op.</span></div></li>
+  </ul>
+</section>
+
+<section class="slide" id="volgendestap">
+  <div class="gradient-line"></div>
+  <h2 class="heading">Klaar om de verspilling te stoppen en de <span class="grad">groei aan te zetten?</span></h2>
+  <p class="lead">
+    Week 1 kost geen extra budget en levert meteen op. Daarna bouwen we het op in de volgorde hierboven: eerst meten, dan Google, dan Meta.
+  </p>
+
+  <div class="cta-row">
+    <a class="cta" href="https://www.tryaizy.com/">Plan de kickoff</a>
+    <a class="cta ghost" href="#top">Terug naar boven</a>
+  </div>
+
+  <p class="body" style="margin-top: 40px; font-size: 13px;">
+    Bronnen: zoekvolumes, klikprijzen, concurrentie en advertentiehistorie uit SE Ranking (Nederlandse database, september 2026, historische vergelijking september 2025). Website, prijzen, openingstijden, boekingsflow en tracking gecontroleerd op thewaxbar.nl. Concurrentiegegevens van delete-waxing.com en undo.nl. Alle prognoses zijn ramingen op basis van marktgemiddelden.
+  </p>
+</section>
+
+
+<footer>
+  Aizy &middot; AI marketing made aizy &middot; aizy.com
+</footer>
+
+</body>
+</html>
